@@ -58,6 +58,7 @@ ROOT_URLCONF = 'mysite.urls'
 
 CORS_ORIGIN_WHITELIST =[
     'http://localhost:3000',
+    'https://guess-whoo.netlify.app'
 
 ]
 
