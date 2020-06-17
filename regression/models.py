@@ -61,7 +61,7 @@ class Image(models.Model):
 
             predicted_predict = beta[0] *picture1_discolor + beta[1] *picture2_discolor + beta[2]* picture3_discolor + beta[3]* picture4_discolor + beta[4]* picture5_discolor + beta[5]* picture6_discolor + intercept
             predicted_predict = np.asarray(predicted_predict)
-            pyplot.imsave("./media/predicted.jpg", predicted_predict)
+            pyplot.imsave("/media/predicted.jpg", predicted_predict)
 
             self.picture_predicted = "predicted.jpg"
             betastring = ' '.join([str(elem) for elem in beta]) 
