@@ -3,7 +3,6 @@ from sklearn.linear_model import LinearRegression
 import numpy as np
 from matplotlib import image, pyplot
 from PIL import Image
-import cv2
 import scipy.misc
 
 
