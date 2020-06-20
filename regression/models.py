@@ -2,9 +2,10 @@ from django.db import models
 from sklearn.linear_model import LinearRegression
 import numpy as np
 from matplotlib import image, pyplot
-from PIL import Image
+import PIL
 from django.core.files import File
 import scipy.misc
+from io import BytesIO
 
 
 # Create your models here.
@@ -61,10 +62,14 @@ class Image(models.Model):
             intercept = lr.intercept_
 
             predicted_predict = beta[0] *picture1_discolor + beta[1] *picture2_discolor + beta[2]* picture3_discolor + beta[3]* picture4_discolor + beta[4]* picture5_discolor + beta[5]* picture6_discolor + intercept
-            predicted_predict = np.asarray(predicted_predict)
-            pyplot.imsave("../predicted.jpg", predicted_predict)
-
-            self.picture_predicted = "predicted.jpg"
+            # img = Image.fromarray(data, 'RGB')
+            # image = pyplot.imsave("predicted.jpg", predicted_predict)
+            # print(image.shape)
+            
+            img = PIL.Image.new('RGB', (60, 30), color = 'red')
+            thumb_io = BytesIO()
+            img.save(thumb_io, 'JPEG', quality=85)
+            self.picture_predicted = File(thumb_io, name="jpg.jpg")
             betastring = ' '.join([str(elem) for elem in beta]) 
             self.beta = betastring
             print(betastring)
