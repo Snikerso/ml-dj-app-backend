@@ -62,17 +62,27 @@ class Image(models.Model):
             intercept = lr.intercept_
 
             predicted_predict = beta[0] *picture1_discolor + beta[1] *picture2_discolor + beta[2]* picture3_discolor + beta[3]* picture4_discolor + beta[4]* picture5_discolor + beta[5]* picture6_discolor + intercept
-            # img = Image.fromarray(data, 'RGB')
-            # image = pyplot.imsave("predicted.jpg", predicted_predict)
-            # print(image.shape)
+            pyplot.axis('off')
             
-            img = PIL.Image.new('RGB', (60, 30), color = 'red')
+            pyplot.imshow(predicted_predict)
             thumb_io = BytesIO()
-            img.save(thumb_io, 'JPEG', quality=85)
-            self.picture_predicted = File(thumb_io, name="jpg.jpg")
+            pyplot.savefig(thumb_io, dpi=300, bbox_inches='tight', pad_inches=0)
+
+            im = PIL.Image.open(thumb_io)
+
+
+            
+            #imge = PIL.Image.fromarray(predicted_predict, 'RGB')
+            # images = PIL.Image.fromarray(predicted_predict ,"RGB")
+            # print(predicted_predict.shape)
+            
+            # img = PIL.Image.new('RGB', (60, 30), color = 'red')
+            # 
+            self.picture_predicted = File(thumb_io, name="jpg.png")
+
             betastring = ' '.join([str(elem) for elem in beta]) 
             self.beta = betastring
-            print(betastring)
+
 
             
 
